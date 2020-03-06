@@ -1,5 +1,4 @@
 require 'mongo'
-require 'dotenv/load'
 
 module IuguEstelar
   class Mongo
