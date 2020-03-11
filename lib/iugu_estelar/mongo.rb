@@ -3,7 +3,8 @@ require 'mongo'
 module IuguEstelar
   class Mongo
     def initialize
-      @client = ::Mongo::Client.new(ENV['MONGODB'])
+      uri = ::Mongo::URI.new(ENV['MONGODB'])
+      @client = ::Mongo::Client.new(uri)
     end
 
     def save_invoices invoices
