@@ -1,6 +1,8 @@
 require "iugu_estelar/version"
 require "iugu_estelar/mongo"
 require "iugu_estelar/iugu"
+require "iugu_estelar/iugu/subscription"
+require "iugu_estelar/text_database"
 
 module IuguEstelar
   class Error < StandardError; end
