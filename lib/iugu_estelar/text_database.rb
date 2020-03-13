@@ -9,7 +9,12 @@ module IuguEstelar
 
     def self.load(filename)
       file = File.open("tmp/#{filename}", "r")
-      JSON.parse(file.read(content))
+      JSON.parse(file.read)
+    end
+
+    def self.load_raw_data(filename)
+      file = File.open("tmp/#{filename}", "r")
+      file.read.split("\n")
     end
   end
 end
