@@ -1,3 +1,5 @@
+require 'json'
+
 module IuguEstelar
   module Iugu
     class Invoice
@@ -9,8 +11,12 @@ module IuguEstelar
       end
 
       def refund
-        IuguEstelar::Iugu.request_to_iugu(:post, "invoices/#{id}/refund", {})
-        true
+        begin
+          IuguEstelar::Iugu.request_to_iugu(:post, "invoices/#{id}/refund", {})
+          true
+        rescue RestClient::BadRequest => e
+          JSON.parse(e.response.body)
+        end
       end
 
       def charge(payment_method_id)
