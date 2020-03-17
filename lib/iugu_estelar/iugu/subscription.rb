@@ -7,7 +7,7 @@ module IuguEstelar
   module Iugu
     class Subscription
 
-      attr_reader :id, :price_cents, :invoices, :raw_data
+      attr_reader :id, :price_cents, :invoices, :raw_data, :customer
 
       def initialize(id)
         @raw_data = IuguEstelar::Iugu.request_to_iugu(:get, "subscriptions/#{id}", {})
