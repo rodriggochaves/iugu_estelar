@@ -20,10 +20,14 @@ module IuguEstelar
       end
 
       def charge(payment_method_id)
-        IuguEstelar::Iugu.request_to_iugu(:post, "charge", {
-          invoice_id: @id,
-          customer_payment_method_id: payment_method_id
-        })
+        begin
+          IuguEstelar::Iugu.request_to_iugu(:post, "charge", {
+            invoice_id: @id,
+            customer_payment_method_id: payment_method_id
+          })
+        rescue RestClient::BadRequest => e
+          JSON.parse(e.response.body)
+        end
       end
     end
   end
