@@ -39,18 +39,21 @@ module IuguEstelar
 
       def create_invoice
         begin
-          response = IuguEstelar::Iugu.request_to_iugu(:post, "invoices", {
+          invoice = IuguEstelar::Iugu.request_to_iugu(:post, "invoices", {
             email: @email,
             subscription_id: @id,
             items: [{
               description: "Assinatura: #{@plan_name}",
               price_cents: @price_cents,
               quantity: 1
+            }, {
+              description: '50off_3meses_fev20',
+              price_cents: -(@price_cents / 2),
+              quantity: 1,
             }],
             due_date: (Time.now + (2 * 24 * 60 * 60)).to_s
           })
 
-          invoice = JSON.parse(response.body)
           IuguEstelar::Iugu::Invoice.new(invoice["id"])
         rescue RestClient::UnprocessableEntity => e
           JSON.parse(e.response.body)
