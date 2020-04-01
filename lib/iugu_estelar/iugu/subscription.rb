@@ -59,6 +59,10 @@ module IuguEstelar
           JSON.parse(e.response.body)
         end
       end
+
+      def suspend
+        Iugu.request_to_iugu(:post, "subscriptions/#{@id}/suspend", {})
+      end
     end
   end
 end
