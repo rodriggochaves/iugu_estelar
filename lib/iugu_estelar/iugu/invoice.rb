@@ -3,11 +3,12 @@ require 'json'
 module IuguEstelar
   module Iugu
     class Invoice
-      attr_reader :raw_data, :id
+      attr_reader :raw_data, :id, :status
 
       def initialize(id)
         @raw_data = IuguEstelar::Iugu.request_to_iugu(:get, "invoices/#{id}", {})
         @id = @raw_data["id"]
+        @status = @raw_data["status"]
       end
 
       def refund
