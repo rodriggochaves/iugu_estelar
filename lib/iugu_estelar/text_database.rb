@@ -1,4 +1,5 @@
 require 'json'
+require 'csv'
 
 module IuguEstelar
   module TextDatabase
@@ -15,6 +16,10 @@ module IuguEstelar
     def self.load_raw_data(filename)
       file = File.open("tmp/#{filename}", "r")
       file.read.split("\n")
+    end
+
+    def self.load_csv
+      CSV.read("tmp/sheet2.csv", headers: false)
     end
   end
 end
